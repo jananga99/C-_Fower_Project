@@ -45,18 +45,32 @@ int main() {
 //    }
 //    (*app4.getOrderBook(instrument)).print();
 
-    ExchangeApplication app5 = *new ExchangeApplication();
-    const int numOrders5 = 3;
-    Order  orders5[numOrders5] = {
-            Order("aa13", "Rose", 2, 100, 55),
+//    ExchangeApplication app5 = *new ExchangeApplication();
+//    const int numOrders5 = 3;
+//    Order  orders5[numOrders5] = {
+//            Order("aa13", "Rose", 1, 100, 55),
+//            Order("aa14", "Rose", 1, 100, 65),
+//            Order("aa15", "Rose", 2, 300, 1)
+//    };
+//    for(auto & i : orders5){
+//        app5.addOrder(&i, instrument);
+//        (*app5.getOrderBook(instrument)).print();
+//    }
+
+
+
+    ExchangeApplication app6 = *new ExchangeApplication();
+    const int numOrders6 = 4;
+    Order  orders5[numOrders6] = {
+            Order("aa13", "Rose", 1, 100, 55),
             Order("aa14", "Rose", 1, 100, 65),
-            Order("aa15", "Rose", 1, 300, 1)
+            Order("aa15", "Rose", 2, 300, 1),
+            Order("aa16", "Rose", 1, 100, 2)
     };
     for(auto & i : orders5){
-        app5.addOrder(&i, instrument);
+        app6.addOrder(&i, instrument);
     }
-    (*app5.getOrderBook(instrument)).print();
-
+    (*app6.getOrderBook(instrument)).print();
 
 
 

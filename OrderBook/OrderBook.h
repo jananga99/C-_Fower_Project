@@ -28,21 +28,19 @@ public:
 
     // only if return True, insert new node to order book
     static bool removeFillOrders(SortedLinkedList* orders, int* numOrders, Order* newOrder) {
-        for (int i = 0; i < *numOrders; i++) {
+        while ( *numOrders > 0) {
             Order *currentOrder = orders->getHead()->order;
-            if (newOrder->getPrice() == currentOrder->getPrice()) {
-                if (newOrder->getQuantity() > currentOrder->getQuantity()) {
-                    newOrder->setQuantity(newOrder->getQuantity() - currentOrder->getQuantity());
-                    orders->remove(currentOrder);
-                    (*numOrders)--;
-                } else if (newOrder->getQuantity() < orders->getHead()->order->getQuantity()) {
-                    currentOrder->setQuantity(currentOrder->getQuantity() - newOrder->getQuantity());
-                    return false;
-                } else {
-                    orders->remove(currentOrder);
-                    (*numOrders)--;
-                    return false;
-                }
+            if (newOrder->getQuantity() > currentOrder->getQuantity()) {
+                newOrder->setQuantity(newOrder->getQuantity() - currentOrder->getQuantity());
+                orders->remove(currentOrder);
+                (*numOrders)--;
+            } else if (newOrder->getQuantity() < currentOrder->getQuantity()) {
+                currentOrder->setQuantity(currentOrder->getQuantity() - newOrder->getQuantity());
+                return false;
+            } else {
+                orders->remove(currentOrder);
+                (*numOrders)--;
+                return false;
             }
         }
         return true;
