@@ -9,17 +9,17 @@ int main() {
 
     std::string instrument = "Rose";
 
-//    ExchangeApplication app2 = *new ExchangeApplication();
-//    const int numOrders2 = 3;
-//    Order  orders2[numOrders2] = {
-//            Order("aa13", "Rose", 2, 100, 55),
-//            Order("aa14", "Rose", 2, 100, 45),
-//            Order("aa15", "Rose", 1, 100, 35)
-//    };
-//    for(auto & i : orders2){
-//        app2.addOrder(&i, instrument);
-//    }
-//    (*app2.getOrderBook(instrument)).print();
+    ExchangeApplication app2 = *new ExchangeApplication();
+    const int numOrders2 = 3;
+    Order  orders2[numOrders2] = {
+            Order("aa13", "Rose", 2, 100, 55),
+            Order("aa14", "Rose", 2, 100, 45),
+            Order("aa15", "Rose", 1, 100, 35)
+    };
+    for(auto & i : orders2){
+        app2.addOrder(&i, instrument);
+    }
+    (*app2.getOrderBook(instrument)).print();
 
 //    ExchangeApplication app3 = *new ExchangeApplication();
 //    const int numOrders3 = 3;
@@ -59,18 +59,18 @@ int main() {
 
 
 
-    ExchangeApplication app6 = *new ExchangeApplication();
-    const int numOrders6 = 4;
-    Order  orders5[numOrders6] = {
-            Order("aa13", "Rose", 1, 100, 55),
-            Order("aa14", "Rose", 1, 100, 65),
-            Order("aa15", "Rose", 2, 300, 1),
-            Order("aa16", "Rose", 1, 100, 2)
-    };
-    for(auto & i : orders5){
-        app6.addOrder(&i, instrument);
-    }
-    (*app6.getOrderBook(instrument)).print();
+//    ExchangeApplication app6 = *new ExchangeApplication();
+//    const int numOrders6 = 4;
+//    Order  orders5[numOrders6] = {
+//            Order("aa13", "Rose", 1, 100, 55),
+//            Order("aa14", "Rose", 1, 100, 65),
+//            Order("aa15", "Rose", 2, 300, 1),
+//            Order("aa16", "Rose", 1, 100, 2)
+//    };
+//    for(auto & i : orders5){
+//        app6.addOrder(&i, instrument);
+//    }
+//    (*app6.getOrderBook(instrument)).print();
 
 
 
