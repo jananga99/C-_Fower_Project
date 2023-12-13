@@ -34,12 +34,18 @@ public:
                 newOrder->setQuantity(newOrder->getQuantity() - currentOrder->getQuantity());
                 orders->remove(currentOrder);
                 (*numOrders)--;
+                //TODO 2: Add PFill transaction to report for newOrder
+                //TODO 3 : Add Fill transaction to report for currentOrder
             } else if (newOrder->getQuantity() < currentOrder->getQuantity()) {
                 currentOrder->setQuantity(currentOrder->getQuantity() - newOrder->getQuantity());
+                //TODO 4: Add Fill transaction to report for newOrder
+                //TODO 5 : Add PFill transaction to report for currentOrder
                 return false;
             } else {
                 orders->remove(currentOrder);
                 (*numOrders)--;
+                //TODO 6: Add Fill transaction to report for newOrder
+                //TODO 7 : Add Fill transaction to report for currentOrder
                 return false;
             }
         }
@@ -66,6 +72,7 @@ public:
         if(removeFillOrders(opposedOrders, opposedCount, newOrder)){
             currentOrders->insert(newOrder);
             (*currentCount)++;
+            // TODO 1 : Add new order add transaction to the execution report
         }
     }
 
