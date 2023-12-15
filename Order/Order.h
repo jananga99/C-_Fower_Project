@@ -7,8 +7,8 @@
 
 
 #include <string>
+#include <iostream>
 #include "OrderValidation.h"
-
 
 
 class Order {
@@ -63,6 +63,10 @@ public:
                 }
             }
         }
+    }
+
+    bool getValidity(){
+        return isValid;
     }
 
     void setQuantity(int newQuantity) {
