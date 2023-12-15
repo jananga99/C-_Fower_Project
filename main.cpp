@@ -2,7 +2,7 @@
 #include "Order/Order.h"
 #include "SortedLinkedList/SortedLinkedList.h"
 #include "ExchangeApplication/ExchangeApplication.h"
-#include "CSVReader/CSVReader.h"
+#include "CSVManager/CSVManager.h"
 
 int Order::count = 0;
 
@@ -10,7 +10,7 @@ int main() {
 
     ExchangeApplication app2 = *new ExchangeApplication();
     
-    CSVReader reader = *new CSVReader();
+    CSVManager reader = *new CSVManager();
     std::string filename = "/home/malith/Documents/C-_Fower_Project/CSVFiles/orders.csv";
     std::list<Order> orders = reader.readOrders(filename);
 

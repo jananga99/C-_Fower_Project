@@ -6,14 +6,14 @@
 #include <vector>
 #include <sstream>
 
-#ifndef TEST2_CSVREADER_H
-#define TEST2_CSVREADER_H
+#ifndef TEST2_CSVManager_H
+#define TEST2_CSVManager_H
 
-class CSVReader {
+class CSVManager {
  
     public:
         std::list<Order> readOrders(std::string filename);
 
 };
 
-#endif //TEST2_CSVREADER_H
+#endif //TEST2_CSVManager_H

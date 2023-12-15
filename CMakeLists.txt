@@ -9,6 +9,6 @@ add_executable(test2 main.cpp
         Order/Order.h
         OrderBook/OrderBook.h
         ExchangeApplication/ExchangeApplication.h
-        CSVReader/CSVReader.h
-        CSVReader/CSVReader.cpp
+        CSVManager/CSVManager.h
+        CSVManager/CSVManager.cpp
         )

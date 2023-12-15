@@ -1,7 +1,7 @@
-#include "CSVReader.h"
+#include "CSVManager.h"
 
 
-std::list<Order> CSVReader::readOrders(std::string filename){
+std::list<Order> CSVManager::readOrders(std::string filename){
 
     std::list<Order> orders;
     
