@@ -14,6 +14,8 @@ int main() {
     CSVManager reader = *new CSVManager();
     std::string filename = "/home/malith/Documents/C-_Fower_Project/CSVFiles/orders.csv";
     std::list<Order> orders = reader.readOrders(filename);
+
+    std::string instrument = "Rose";
   
     for(auto & i : orders){
         app2.addOrder(&i, instrument);
