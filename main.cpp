@@ -12,7 +12,7 @@ int main() {
     ExchangeApplication app2 = *new ExchangeApplication();
     const int numOrders2 = 3;
     Order  orders2[numOrders2] = {
-            Order("aa13", "Rose", 2, 100, 55),
+            Order("aa13", "Rose", 3, 100, 55),
             Order("aa14", "Rose", 2, 100, 45),
             Order("aa15", "Rose", 1, 100, 35)
     };
