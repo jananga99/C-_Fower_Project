@@ -10,7 +10,7 @@ std::list<Order> CSVManager::readOrders(std::string filename){
     // Checking the availability of the file.
     if(!file.is_open()){
         std::cout << "CSV File not found" << std::endl;
-        // return orders;
+        return orders;
     }
 
     std::string line;
@@ -36,7 +36,6 @@ std::list<Order> CSVManager::readOrders(std::string filename){
             orders.push_back(order);
         }
         
-
     }
 
     file.close();
