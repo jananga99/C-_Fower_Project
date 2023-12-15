@@ -20,6 +20,7 @@ private:
     double price;
     std::string orderID;
     OrderValidation orderValidation;
+    bool isValid = true;
 public:
     static int count;
     Order(std::string clientOrderID, std::string instrument, int side, int quantity, int price){
@@ -34,6 +35,7 @@ public:
             count ++;
             std::cout << "Order " << orderID << " created" << std::endl;
         }else{
+                isValid = false;
                 std::cout << "Invalid order. Client order ID: " << clientOrderID << std::endl;
         }
     }
