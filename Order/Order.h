@@ -8,6 +8,8 @@
 
 #include <string>
 #include <iostream>
+#include "OrderValidation.h"
+
 
 class Order {
 private:
@@ -17,16 +19,28 @@ private:
     int quantity;
     double price;
     std::string orderID;
+    OrderValidation orderValidation;
     bool isValid = true;
 public:
     static int count;
-    Order(std::string clientOrderID, std::string instrument, int side, int quantity, int price)
-            : clientOrderID(std::move(clientOrderID)), instrument(std::move(instrument)), side(side), quantity(quantity), price(price) {
-        orderID = "ord" + std::to_string(count+1);
-        count ++;
+    Order(std::string clientOrderID, std::string instrument, int side, int quantity, int price){
+        if(orderValidation.validateOrderFields(clientOrderID, instrument, side, quantity, price)){
+            this->clientOrderID = clientOrderID;
+            this->instrument = instrument;
+            this->side = side;
+            this->quantity = quantity;
+            this->price = price;
+
+            orderID = "ord" + std::to_string(count+1);
+            count ++;
+            std::cout << "Order " << orderID << " created" << std::endl;
+        }else{
+                isValid = false;
+                std::cout << "Invalid order. Client order ID: " << clientOrderID << std::endl;
+        }
     }
 
-    // Reurns the order whch should be on top of the order book
+    // Returns the order which should be on top of the order book
     static Order getMinOrder(Order order1, Order order2) {
         if(order1.price == order2.price){
             if (order1.orderID > order2.orderID) {
