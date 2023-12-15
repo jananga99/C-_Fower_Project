@@ -8,4 +8,7 @@ add_executable(test2 main.cpp
         SortedLinkedList/Node.h
         Order/Order.h
         OrderBook/OrderBook.h
-        ExchangeApplication/ExchangeApplication.h)
+        ExchangeApplication/ExchangeApplication.h
+        CSVReader/CSVReader.h
+        CSVReader/CSVReader.cpp
+        )

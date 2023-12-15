@@ -7,6 +7,7 @@
 
 
 #include <string>
+#include <iostream>
 
 class Order {
 private:
@@ -16,6 +17,7 @@ private:
     int quantity;
     double price;
     std::string orderID;
+    bool isValid = true;
 public:
     static int count;
     Order(std::string clientOrderID, std::string instrument, int side, int quantity, int price)
@@ -47,6 +49,10 @@ public:
                 }
             }
         }
+    }
+
+    bool getValidity(){
+        return isValid;
     }
 
     void setQuantity(int newQuantity) {
