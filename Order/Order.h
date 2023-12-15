@@ -21,10 +21,12 @@ private:
     std::string orderID;
     OrderValidation orderValidation;
     bool isValid = true;
+    std::string rejectedReason = {};
+
 public:
     static int count;
     Order(std::string clientOrderID, std::string instrument, int side, int quantity, int price){
-        if(orderValidation.validateOrderFields(clientOrderID, instrument, side, quantity, price)){
+        if(orderValidation.validateOrderFields(clientOrderID, instrument, side, quantity, price, &rejectedReason)){
             this->clientOrderID = clientOrderID;
             this->instrument = instrument;
             this->side = side;
@@ -36,7 +38,7 @@ public:
             std::cout << "Order " << orderID << " created" << std::endl;
         }else{
                 isValid = false;
-                std::cout << "Invalid order. Client order ID: " << clientOrderID << std::endl;
+                std::cout << "Invalid order. Client order ID: " << clientOrderID << "Rejected reason: " << rejectedReason << std::endl;
         }
     }
 
