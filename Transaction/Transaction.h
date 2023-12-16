@@ -60,9 +60,41 @@ public:
             setTimestamp();
    }
 
-   std::string getTimeStamp(){
-       return timestamp;
-   }
+    std::string getClientOrderID(){
+         return clientOrderID;
+    }
+
+    std::string getOrderID(){
+         return OrderID;
+    }
+
+    std::string getInstrument(){
+         return instrument;
+    }
+
+    int getSide(){
+         return side;
+    }
+
+    double getPrice(){
+         return price;
+    }
+
+    int getQuantity(){
+         return quantity;
+    }
+
+    int getStatus(){
+         return status;
+    }
+
+    std::string getRejectedReason(){
+         return rejectedReason;
+    }
+
+    std::string getTimestamp(){
+         return timestamp;
+    }
 
 };
 
