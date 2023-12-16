@@ -9,6 +9,8 @@
 #include <iostream>
 #include "../Order/Order.h"
 #include "../SortedLinkedList/SortedLinkedList.h"
+#include <list>
+#include "../Transaction/Transaction.h"
 
 class OrderBook {
 private:
@@ -17,6 +19,19 @@ private:
     int numSellOrders;
     int numBuyOrders;
     std::string instrument;
+    std::list<Transaction> transactions;
+
+    void addTransaction(Order* order, int quantity, int status){
+        Transaction transaction(order->getClientOrderID(),
+                                order->getOrderID(),
+                                order->getInstrument(),
+                                order->getSide(), 
+                                order->getPrice(), 
+                                quantity,
+                                status,
+                                order->getRejectedReason());
+        transactions.push_back(transaction);
+    }
 
 public:
     explicit OrderBook(std::string instrument) : instrument(std::move(instrument)) {
@@ -69,11 +84,18 @@ public:
             opposedCount = &numBuyOrders;
         }
 
-        if(removeFillOrders(opposedOrders, opposedCount, newOrder)){
-            currentOrders->insert(newOrder);
-            (*currentCount)++;
-            // TODO 1 : Add new order add transaction to the execution report
-        }
+        if(newOrder->getValidity()){
+            if(removeFillOrders(opposedOrders, opposedCount, newOrder)){
+                currentOrders->insert(newOrder);
+                (*currentCount)++;
+                // TODO 1 : Add new order add transaction to the execution report
+                addTransaction(newOrder, newOrder->getQuantity(), 0);
+            }
+        
+        }else{
+                // TODO 8 : Add new order reject transaction to the execution report    
+                addTransaction(newOrder, newOrder->getQuantity(), 1);
+            }
     }
 
     [[nodiscard]] SortedLinkedList getSellOrders() const {
