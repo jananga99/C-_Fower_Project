@@ -98,15 +98,15 @@ public:
     }
 
     void print(){
-        std::cout << "ClientOrderID: " << clientOrderID << std::endl
-                    << "OrderID: " << OrderID << std::endl
-                    << "Instrument: " << instrument << std::endl
-                    << "Side: " << side << std::endl
-                    << "Price: " << price << std::endl
-                    << "Quantity: " << quantity << std::endl
-                    << "Status: " << status << std::endl
-                    << "RejectedReason: " << rejectedReason << std::endl
-                    << "Timestamp: " << timestamp << std::endl;
+        std::cout << "ClientOrderID: " << clientOrderID 
+                    << ", OrderID: " << OrderID 
+                    << ", Instrument: " << instrument 
+                    << ", Side: " << side 
+                    << ", Price: " << price 
+                    << ", Quantity: " << quantity 
+                    << ", Status: " << status 
+                    << ", RejectedReason: " << rejectedReason 
+                    << ", Timestamp: " << timestamp << std::endl;
     }
 
 };
