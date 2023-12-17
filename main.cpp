@@ -3,6 +3,9 @@
 #include "SortedLinkedList/SortedLinkedList.h"
 #include "ExchangeApplication/ExchangeApplication.h"
 #include "CSVManager/CSVManager.h"
+#include "Transaction/Transaction.h"
+#include <list>
+#include "OrderBook/OrderBook.h"
 
 int Order::count = 0;
 
@@ -15,14 +18,17 @@ int main() {
     std::string filename = "/home/malith/Documents/C-_Fower_Project/CSVFiles/orders.csv";
     std::list<Order> orders = reader.readOrders(filename);
 
-    std::string instrument = "Rose";
   
-    for(auto & i : orders){
+    for(auto& i : orders){
+        std::string instrument = i.getInstrument();
         app2.addOrder(&i, instrument);
     }
-    (*app2.getOrderBook(instrument)).print();
-    (*app2.getOrderBook(instrument)).printTransactions();
+    
 
+    std::list <Transaction> transactions = OrderBook::getTransactions();
+    for(auto& i : transactions){
+        i.print();
+    }
 
     return 0;
 }
