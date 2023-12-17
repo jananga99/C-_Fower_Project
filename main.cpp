@@ -14,21 +14,20 @@ int main() {
     ExchangeApplication app2 = *new ExchangeApplication();
 
     
-    CSVManager reader = *new CSVManager();
+    CSVManager csvmanager = *new CSVManager();
     std::string filename = "/home/malith/Documents/C-_Fower_Project/CSVFiles/orders.csv";
-    std::list<Order> orders = reader.readOrders(filename);
+    std::list<Order> orders = csvmanager.readOrders(filename);
 
-  
+    // Adding the orders.
     for(auto& i : orders){
         std::string instrument = i.getInstrument();
         app2.addOrder(&i, instrument);
     }
     
-
+    // Writing the csv file using the transactions.
     std::list <Transaction> transactions = OrderBook::getTransactions();
-    for(auto& i : transactions){
-        i.print();
-    }
+    std::string filename2 = "/home/malith/Documents/C-_Fower_Project/CSVFiles/transactions.csv";
+    csvmanager.writeTransactions(filename2, transactions);
 
     return 0;
 }

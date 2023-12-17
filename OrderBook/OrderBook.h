@@ -144,13 +144,6 @@ public:
     }
 
     void printTransactions(){
-
-        // Remove this one finalize. This is for testing whether csv writer works.
-        CSVManager writer = *new CSVManager();
-        std::string filename = "/home/malith/Documents/C-_Fower_Project/CSVFiles/transactions.csv";
-        writer.writeTransactions(filename, transactions);
-
-        // Start printing the transactions.
         std::cout << "=====================================" <<  std::endl
                     << "Transactions for " << instrument << std::endl;
                     
