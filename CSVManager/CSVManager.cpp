@@ -53,7 +53,9 @@ void CSVManager::writeTransactions(std::string filename, std::list<Transaction> 
 
     file << "ClientOrderID,OrderID,Instrument,Side,Price,Quantity,Status,RejectedReason,Timestamp" << std::endl;
     for(auto & i : transactions){
-        file << i.getClientOrderID() << "," << i.getOrderID() << "," << i.getInstrument() << "," << i.getSide() << "," << i.getPrice() << "," << i.getQuantity() << "," << i.getStatus() << "," << i.getRejectedReason() << "," << i.getTimestamp() << std::endl;
+        file << i.getClientOrderID() << "," << i.getOrderID() << "," << i.getInstrument() << "," << i.getSide() << "," 
+            << i.getPrice() << "," << i.getQuantity() << "," << i.getStatus() << "," << i.getRejectedReason() << "," 
+            << i.getTimestamp() << std::endl;
     }
 
     file.close();
