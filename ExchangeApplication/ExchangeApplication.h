@@ -10,19 +10,16 @@
 
 class ExchangeApplication {
 private:
-    OrderBook* orderBooks;
+    OrderBook orderBooks[5];
     std::string instruments[5] = {"Rose", "Lavender", "Lotus", "Tulip", "Orchid"};
     int numOrderBooks;
 public:
-    ExchangeApplication() {
-        orderBooks = (OrderBook*) calloc(5,sizeof (OrderBook));
-        for(int i=0;i<5;i++)
-            orderBooks[i] = *new OrderBook(instruments[i]);
-        numOrderBooks = 5;
+    ExchangeApplication() : numOrderBooks(5) {
+        for (int i = 0; i < 5; i++){
+            orderBooks[i] =*new OrderBook(instruments[i]);
+        }
     }
-//    ~ExchangeApplication() {
-//        free(orderBooks);
-//    }
+
     OrderBook* getOrderBook(std::string& instrument){
         OrderBook* currentOrderBook ;
         for (int i = 0; i < numOrderBooks; i++) {
@@ -33,6 +30,7 @@ public:
         }
         return currentOrderBook;
     }
+    
     void addOrder(Order* newOrder,  std::string& instrument) {
         OrderBook* orderBook = getOrderBook(instrument);
         (*orderBook).addOrder(newOrder);

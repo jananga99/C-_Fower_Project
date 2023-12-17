@@ -71,6 +71,10 @@ public:
         return isValid;
     }
 
+    std::string getRejectedReason(){
+        return rejectedReason;
+    }
+
     void setQuantity(int newQuantity) {
         quantity = newQuantity;
     }

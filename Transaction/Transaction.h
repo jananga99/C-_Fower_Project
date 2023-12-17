@@ -4,6 +4,7 @@
 #include <string>
 #include <chrono>
 #include <iomanip>
+#include <iostream>
 
 class Transaction{
 private:
@@ -94,6 +95,18 @@ public:
 
     std::string getTimestamp(){
          return timestamp;
+    }
+
+    void print(){
+        std::cout << "ClientOrderID: " << clientOrderID 
+                    << ", OrderID: " << OrderID 
+                    << ", Instrument: " << instrument 
+                    << ", Side: " << side 
+                    << ", Price: " << price 
+                    << ", Quantity: " << quantity 
+                    << ", Status: " << status 
+                    << ", RejectedReason: " << rejectedReason 
+                    << ", Timestamp: " << timestamp << std::endl;
     }
 
 };
