@@ -52,28 +52,28 @@ public:
                 orders->remove(currentOrder);
                 (*numOrders)--;
                 //TODO 2: Add PFill transaction to report for newOrder
-                addTransaction(newOrder, currentOrder->getQuantity(), 3);
+                addTransaction(newOrder, currentOrder->getQuantity(), Status::Pfill);
 
                 //TODO 3 : Add Fill transaction to report for currentOrder
-                addTransaction(currentOrder, currentOrder->getQuantity(), 2);
+                addTransaction(currentOrder, currentOrder->getQuantity(), Status::Fill);
 
             } else if (newOrder->getQuantity() < currentOrder->getQuantity()) {
                 currentOrder->setQuantity(currentOrder->getQuantity() - newOrder->getQuantity());
                 //TODO 4: Add Fill transaction to report for newOrder
-                addTransaction(newOrder, newOrder->getQuantity(), 2);
+                addTransaction(newOrder, newOrder->getQuantity(), Status::Fill);
 
                 //TODO 5 : Add PFill transaction to report for currentOrder
-                addTransaction(currentOrder, newOrder->getQuantity(), 3);
+                addTransaction(currentOrder, newOrder->getQuantity(), Status::Pfill);
 
                 return false;
             } else {
                 orders->remove(currentOrder);
                 (*numOrders)--;
                 //TODO 6: Add Fill transaction to report for newOrder
-                addTransaction(newOrder, newOrder->getQuantity(), 2);
+                addTransaction(newOrder, newOrder->getQuantity(), Status::Fill);
 
                 //TODO 7 : Add Fill transaction to report for currentOrder
-                addTransaction(currentOrder, currentOrder->getQuantity(), 2);
+                addTransaction(currentOrder, currentOrder->getQuantity(), Status::Fill);
 
                 return false;
             }
@@ -103,12 +103,12 @@ public:
                 currentOrders->insert(newOrder);
                 (*currentCount)++;
                 // TODO 1 : Add new order add transaction to the execution report
-                addTransaction(newOrder, newOrder->getQuantity(), 0);
+                addTransaction(newOrder, newOrder->getQuantity(), Status::New);
             }
         
         }else{
                 // TODO 8 : Add new order reject transaction to the execution report    
-                addTransaction(newOrder, newOrder->getQuantity(), 1);
+                addTransaction(newOrder, newOrder->getQuantity(), Status::Rejected);
             }
     }
 
