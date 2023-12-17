@@ -108,6 +108,10 @@ public:
         std::cout  << orderID << " " << clientOrderID << " " << instrument << " "<< side << " "<< quantity << " " << price << std::endl;
     }
 
+    static void resetCount(){
+        count = 0;
+    }
+
 };
 
 

@@ -13,8 +13,8 @@
 class CSVManager {
  
     public:
-        std::list<Order> readOrders(std::string filename);
-        void writeTransactions(std::string filename, std::list<Transaction> transactions);
+        static std::list<Order> readOrders(const std::string& filename);
+        static void writeTransactions(const std::string& filename, std::list<Transaction> transactions);
 };
 
 #endif //TEST2_CSVManager_H
