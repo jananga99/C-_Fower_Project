@@ -20,7 +20,7 @@ private:
     int numSellOrders;
     int numBuyOrders;
     std::string instrument;
-    std::list<Transaction> transactions;
+    static inline std::list<Transaction> transactions;
 
     void addTransaction(Order* order, int quantity, int status){
         Transaction transaction(order->getClientOrderID(),
@@ -158,6 +158,10 @@ public:
             i.print();
         }
         std::cout << "=====================================" <<  std::endl;
+    }
+
+    static std::list<Transaction> getTransactions(){
+        return transactions;
     }
 };
 
