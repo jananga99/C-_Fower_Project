@@ -6,6 +6,14 @@
 #include <iomanip>
 #include <iostream>
 
+// Status of the execution report.
+enum Status{
+     New = 0,
+     Rejected = 1,
+     Fill = 2,
+     Pfill = 3
+};
+
 class Transaction{
 private:
     std::string clientOrderID;
