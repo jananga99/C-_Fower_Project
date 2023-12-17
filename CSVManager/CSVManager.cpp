@@ -41,3 +41,23 @@ std::list<Order> CSVManager::readOrders(std::string filename){
     file.close();
     return orders;
 };
+
+void CSVManager::writeTransactions(std::string filename, std::list<Transaction> transactions){
+    std::ofstream file(filename);
+
+    // Checking the availability of the file.
+    if(!file.is_open()){
+        std::cout << "CSV File not found" << std::endl;
+        return;
+    }
+
+    file << "ClientOrderID,OrderID,Instrument,Side,Price,Quantity,Status,RejectedReason,Timestamp" << std::endl;
+    for(auto & i : transactions){
+        file << i.getClientOrderID() << "," << i.getOrderID() << "," << i.getInstrument() << "," << i.getSide() << "," 
+            << i.getPrice() << "," << i.getQuantity() << "," << i.getStatus() << "," << i.getRejectedReason() << "," 
+            << i.getTimestamp() << std::endl;
+    }
+
+    file.close();
+    return;
+};
