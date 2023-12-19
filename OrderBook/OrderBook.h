@@ -45,70 +45,57 @@ public:
     OrderBook() = default;
 
     // only if return True, insert new node to order book
-    bool removeFillOrders(SortedLinkedList* orders, int* numOrders, Order* newOrder) {
+    // return 0 if new order is not filled
+    // return 1 if new order is filled
+    // return 2 if new order is not touched
+    int processFillOrders(SortedLinkedList* orders, int* numOrders, Order* newOrder) {
+        bool notTouched = true;
         while ( *numOrders > 0) {
             Order *currentOrder = orders->getHead()->order;
             if (newOrder->getQuantity() > currentOrder->getQuantity()) {
                 newOrder->setQuantity(newOrder->getQuantity() - currentOrder->getQuantity());
                 orders->remove(currentOrder);
                 (*numOrders)--;
-                //TODO 2: Add PFill transaction to report for newOrder
                 addTransaction(newOrder, currentOrder->getQuantity(), Status::Pfill);
-
-                //TODO 3 : Add Fill transaction to report for currentOrder
                 addTransaction(currentOrder, currentOrder->getQuantity(), Status::Fill);
-
+                notTouched=false;
             } else if (newOrder->getQuantity() < currentOrder->getQuantity()) {
                 currentOrder->setQuantity(currentOrder->getQuantity() - newOrder->getQuantity());
-                //TODO 4: Add Fill transaction to report for newOrder
                 addTransaction(newOrder, newOrder->getQuantity(), Status::Fill);
-
-                //TODO 5 : Add PFill transaction to report for currentOrder
                 addTransaction(currentOrder, newOrder->getQuantity(), Status::Pfill);
-
-                return false;
+                return 0;
             } else {
                 orders->remove(currentOrder);
                 (*numOrders)--;
-                //TODO 6: Add Fill transaction to report for newOrder
                 addTransaction(newOrder, newOrder->getQuantity(), Status::Fill);
-
-                //TODO 7 : Add Fill transaction to report for currentOrder
                 addTransaction(currentOrder, currentOrder->getQuantity(), Status::Fill);
-
-                return false;
+                return 0;
             }
         }
-        return true;
+        return notTouched ? 2 : 1;
     }
 
     void addOrder(Order* newOrder){
         SortedLinkedList* currentOrders  = nullptr;
-        SortedLinkedList* opposedOrders  = nullptr;
         int* currentCount = nullptr;
-        int* opposedCount = nullptr;
         if(newOrder->getSide()==1){
             currentOrders = &buyOrders;
-            opposedOrders = &sellOrders;
             currentCount = &numBuyOrders;
-            opposedCount = &numSellOrders;
         }else{
             currentOrders = &sellOrders;
-            opposedOrders = &buyOrders;
             currentCount = &numSellOrders;
-            opposedCount = &numBuyOrders;
         }
 
         if(newOrder->getValidity()){
-            if(removeFillOrders(opposedOrders, opposedCount, newOrder)){
+            int temp = processFillOrders(currentOrders, currentCount, newOrder);
+            if(temp==1 || temp==2){
                 currentOrders->insert(newOrder);
                 (*currentCount)++;
-                // TODO 1 : Add new order add transaction to the execution report
-                addTransaction(newOrder, newOrder->getQuantity(), Status::New);
+                if(temp==2)
+                    addTransaction(newOrder, newOrder->getQuantity(), Status::New);
             }
         
         }else{
-                // TODO 8 : Add new order reject transaction to the execution report    
                 addTransaction(newOrder, newOrder->getQuantity(), Status::Rejected);
             }
     }
@@ -144,13 +131,6 @@ public:
     }
 
     void printTransactions(){
-
-        // Remove this one finalize. This is for testing whether csv writer works.
-        CSVManager writer = *new CSVManager();
-        std::string filename = "/home/malith/Documents/C-_Fower_Project/CSVFiles/transactions.csv";
-        writer.writeTransactions(filename, transactions);
-
-        // Start printing the transactions.
         std::cout << "=====================================" <<  std::endl
                     << "Transactions for " << instrument << std::endl;
                     
@@ -162,6 +142,10 @@ public:
 
     static std::list<Transaction> getTransactions(){
         return transactions;
+    }
+
+    static void clearTransactions(){
+        transactions.clear();
     }
 };
 

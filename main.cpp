@@ -11,24 +11,27 @@ int Order::count = 0;
 
 int main() {
 
-    ExchangeApplication app2 = *new ExchangeApplication();
 
-    
-    CSVManager reader = *new CSVManager();
-    std::string filename = "/home/malith/Documents/C-_Fower_Project/CSVFiles/orders.csv";
-    std::list<Order> orders = reader.readOrders(filename);
+    for(int j= 0;j < 7; j++){
+        ExchangeApplication app = *new ExchangeApplication();
+        CSVManager csvManager = *new CSVManager();
+        std::string fileNamePrefix = "./CSVFiles/ex"+std::to_string(j + 1);
 
-  
-    for(auto& i : orders){
-        std::string instrument = i.getInstrument();
-        app2.addOrder(&i, instrument);
+        std::string filename = fileNamePrefix+"/orders.csv";
+        printf("FIlename : %s\n", filename.c_str());
+        std::list<Order> orders = csvManager.readOrders(filename);
+        for(auto& i : orders){
+            std::string instrument = i.getInstrument();
+            app.addOrder(&i, instrument);
+        }
+        std::list <Transaction> transactions = OrderBook::getTransactions();
+        std::string filename2 = fileNamePrefix+"/transactions.csv";
+        csvManager.writeTransactions(filename2, transactions);
+        OrderBook::clearTransactions();
+        Order::resetCount();
     }
-    
 
-    std::list <Transaction> transactions = OrderBook::getTransactions();
-    for(auto& i : transactions){
-        i.print();
-    }
+
 
     return 0;
 }
